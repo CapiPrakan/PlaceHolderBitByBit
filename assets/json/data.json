@@ -1,0 +1,80 @@
+{
+    "Assets": {
+        "Path": "/assets/",
+        "Images": {
+            "Path": "/assets/img/",
+            "Prefix": "img_",
+            "Extension": ".png",
+            "Collider": {
+                "Path": "/assets/img/collider/",
+                "Collider": "collider"
+            },
+            "Cursor": {
+                "Path": "/assets/img/cursor/",
+                "Cursor": "cursor",
+                "CursorSelect": "cursor_selected",
+                "CursorLeft": "cursor_left",
+                "CursorRight": "cursor_right",
+                "Background": "background"
+            },
+            "Dialogos": {
+                "Path": "/assets/img/dialogos/",
+
+                "Dialogos": { 
+                    "Path": "/assets/img/dialogos/dialogos/",
+
+                    "CuadradoDialogo": "cuadrado_dialogo",
+                    "BotonDialogo": "boton_dialogo"
+                },
+                "Personajes": {
+                    "Path": "/assets/img/dialogos/personajes/",
+
+                    "Personajes": [
+                        "prota",
+                        "veronica",
+                        "maria"
+                    ],
+
+                    "Poses": [
+                        "normal",
+                        "alegre",
+                        "triste",
+                        "enfado"
+                    ]
+                },
+                "Backgrounds": {
+                    "Path": "/assets/img/dialogos/backgrounds/",
+
+                    "Backgrounds": [
+                        "habitacion",
+                        "salon",
+                        "salon_cocina",
+                        "salon_comedor",
+                        "salon_descanso"
+                    ]
+                }
+            },
+            "Pantallas": {
+                "Path": "/assets/img/pantallas/",
+
+                "Backgrounds": {
+                    "Path": "/assets/img/pantallas/backgrounds/",
+
+                    "Backgrounds": [
+                        "habitacion",
+                        "salon",
+                        "fin_demo"
+                    ]
+                }
+            }
+        },
+        "Json": {
+            "Path": "/assets/json/",
+            "Prefix": "json_",
+            "Extension": ".json",
+
+            "Dialogos": "dialogo",
+            "Pantallas": "pantallas"
+        }
+    }
+}
