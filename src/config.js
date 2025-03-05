@@ -3,7 +3,6 @@ import Bootloader from '/src/bootloader.js'; // Importamos el Bootloader
 import SceneManager from '/src/scenes/scene_manager.js'; // Importamos la escena ScenePlay
 import ScenePlay from '/src/scenes/scene_play.js'; // Importamos la escena ScenePlay
 import Pantallas from '/src/scenes/pantallas.js'; // Importamos la escena Pantallas
-import Phaser from 'phaser';
 
 // Configuración del juego
 const config = {
