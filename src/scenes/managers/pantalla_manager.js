@@ -20,8 +20,6 @@ class PantallaManager extends Managers {
     create() {
         const data_info_scene = this.scene.get(DATA_INFO)
 
-        console.log(data_info_scene);
-
         this.pantallas_data = data_info_scene.get_json_pantallas();
         this.saves_data = data_info_scene.get_json_saves();
 
