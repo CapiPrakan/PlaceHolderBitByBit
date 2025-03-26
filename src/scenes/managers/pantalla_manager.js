@@ -20,8 +20,11 @@ class PantallaManager extends Managers {
     create() {
         const data_info_scene = this.scene.get(DATA_INFO)
 
-        this.pantallas_data = data_info_scene.get_json_pantallas();
-        this.saves_data = data_info_scene.get_json_saves();
+        this.data = data_info_scene.get_data_json();
+        this.data_json = this.data.Json;
+
+        this.pantallas_data = data_info_scene.get_json(this.data_json.Pantallas);
+        this.saves_data = data_info_scene.get_json(this.data_json.Saves);
 
         this.pantalla_data = this.pantallas_data[this.saves_data.Pantalla];
 
@@ -55,6 +58,8 @@ class PantallaManager extends Managers {
     _change_background() {
         this.background.setTexture("img_" + this.pantalla_data.background);
     }
+
+
 }
 
 export default PantallaManager;
