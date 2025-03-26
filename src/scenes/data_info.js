@@ -46,7 +46,7 @@ class DataInfo extends Phaser.Scene {
     // obtiene el nuemro de assets que tiene que cargar
     get_number_assets() {
         const json_folder = this.cache.json.get("json_folders");
-
+        console.log(json_folder);
         this.number_assets = this.get_number_assets_recursive(json_folder);
         this.loaded_assets = 0;
     }
