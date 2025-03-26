@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { DATA_INFO } from "/src/data/scene_data.js";
+import { DATA_INFO, PANTALLA_MANAGER } from "/src/data/scene_data.js";
 
 class DataInfo extends Phaser.Scene {
     constructor() {
@@ -77,6 +77,10 @@ class DataInfo extends Phaser.Scene {
             this.bar_width * progress,
             this.bar_height
         );
+
+        if (progress === 1) {
+            this.scene.start(PANTALLA_MANAGER);
+        }
     }
 
     // carga los assets
@@ -87,20 +91,52 @@ class DataInfo extends Phaser.Scene {
             this.update_loading_bar();
         });
 
-        this.load_data();
-        this.load_dialog();
+        this.load_jsons();
+        this.load_imgs();
 
         this.load.start();
     }
 
-    // carga los datos
-    load_data() {
-        this.load.json("json_data", this.JSON_PATH + "data.json");
+    load_jsons() {
+        const jsons = ["data", "dialog", "pantallas", "saves"];
+        jsons.forEach((name) => {
+            this.load_json(name);
+        });
     }
 
-    // carga el dialogo
-    load_dialog() {
-        this.load.json("json_dialog", this.JSON_PATH + "dialog.json");
+    load_json(name) {
+        this.load.json("json_"+name, this.JSON_PATH + name+".json");
+    }
+
+    get_json_data() {
+        return this.cache.json.get("json_data").Data;
+    }
+
+    get_json_dialog() {
+        return this.cache.json.get("json_dialog").Dialog;
+    }
+
+    get_json_pantallas() {
+        return this.cache.json.get("json_pantallas").Pantallas;
+    }
+
+    get_json_saves() {
+        return this.cache.json.get("json_saves").Saves;
+    }
+
+    load_imgs() {
+        const paths = ['backgrounds/'];
+        const imgs = ['fin_demo', 'habitacion', 'salon']
+
+        paths.forEach((path) => {
+            imgs.forEach((name) => {
+                this.laod_img_(name, path);
+            });
+        });
+    }
+
+    laod_img_(name, path) {
+        this.load.image("img_"+name, this.IMG_PATH + path + name +".png");
     }
 }
 

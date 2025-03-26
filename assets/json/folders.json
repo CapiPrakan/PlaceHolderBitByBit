@@ -2,6 +2,15 @@
   "name": "assets",
   "folders": [
     {
+      "name": "backgrounds",
+      "folders": [],
+      "files": [
+        "fin_demo.png",
+        "habitacion.png",
+        "salon.png"
+      ]
+    },
+    {
       "name": "img",
       "folders": [],
       "files": []
@@ -11,7 +20,9 @@
       "folders": [],
       "files": [
         "data.json",
-        "dialog.json"
+        "dialog.json",
+        "pantallas.json",
+        "saves.json"
       ]
     }
   ],
