@@ -15,6 +15,7 @@ class DataInfo extends Phaser.Scene {
 
     preload() {
         // ejecutar antes el comando node ./src/utils/generateFoldersJson.js para actualizar el archivo folders.json
+        console.log(this.JSON_PATH);
         this.load.json("json_folders", this.JSON_PATH + "folders.json");
     }
 
