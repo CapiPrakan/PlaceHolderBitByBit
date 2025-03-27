@@ -16,9 +16,24 @@
                         "salon",
                         "fin_demo"
                     ]
-                }, 
+                },
+                "Personajes": {
+                    "Path": "personajes/",
+                    "Personajes": [
+                        "prota",
+                        "maria",
+                        "veronica"
+                    ],
+                    "Poses": [
+                        "normal",
+                        "alegre",
+                        "triste",
+                        "enfado"
+                    ]
+                },
                 "Clases": [
-                    "Backgrounds"
+                    "Backgrounds",
+                    "Personajes"
                 ]   
             },
             "Clases": [

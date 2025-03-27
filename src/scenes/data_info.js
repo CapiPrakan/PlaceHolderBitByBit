@@ -107,7 +107,9 @@ class DataInfo extends Phaser.Scene {
         );
 
         if (progress === 1) {
-            this.scene.start(PANTALLA_MANAGER);
+            setTimeout(() => {
+                this.scene.start(PANTALLA_MANAGER);
+            }, 100);
         }
     }
 
@@ -154,15 +156,46 @@ class DataInfo extends Phaser.Scene {
             clases_img2.forEach((clases2) => {
                 let imgs = this.data_imgs[clases][clases2][clases2];
                 imgs.forEach((name) => {
-                    this.laod_img_(name, this.data_imgs[clases][clases2].Path);
+                    this.laod_img(clases, clases2, name, this.data_imgs[clases][clases2].Path);
                 })
             });
         });
     }
 
-    laod_img_(name, path) {
+    laod_img(clase, clase2, name, a) {
+        switch (clase2) {
+            case "Backgrounds":
+                this.load_img2(clase, name, this.data_imgs[clase][clase2].Path);
+                break;
+            case "Personajes":
+                let poses = this.data_imgs[clase][clase2].Poses;
+                poses.forEach((pose) => {
+                    let path = this.data_imgs[clase].Path + this.data_imgs[clase][clase2].Path + name + "/";
+                    this.load_img2(clase, name + "_" + pose, path);
+                });
+                break;
+            default:
+                console.log("Clase no encontrada");
+                break;
+        }
+    }
+
+    load_img2(scene, name, path){
         const img_suffix = this.data_imgs.Suffix;
-        this.load.image(this.img_prefix + name, this.IMG_PATH + path + name + img_suffix);
+        this.load.image(this.img_prefix + scene + "_" + name, this.IMG_PATH + path + name + img_suffix);
+}
+
+    get_img(scene, name) {
+        let scene_name = ""
+        switch (scene) {
+            case PANTALLA_MANAGER:
+                scene_name = "Pantallas";
+                break;
+            default:
+                break;
+        }
+
+        return this.img_prefix + scene_name + "_" + name;
     }
 }
 
