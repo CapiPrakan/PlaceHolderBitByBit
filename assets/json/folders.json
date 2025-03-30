@@ -64,6 +64,7 @@
       "files": [
         "dialog.json",
         "pantallas.json",
+        "pantalla_animation.json",
         "saves.json"
       ]
     }

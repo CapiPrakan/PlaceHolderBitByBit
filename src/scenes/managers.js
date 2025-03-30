@@ -15,17 +15,13 @@ class Managers extends Phaser.Scene {
     enter() {}
 
     // se ejecuta al actualizar la escena
-    update() {}
+    update() { if (this.isPause) { return; } }
 
     // se ejecuta al pausar la escena
-    pause() {
-        this.isPause = true;
-    }
+    pause() { this.isPause = true; }
 
     // se ejecuta al despausar la escena
-    unpause() {
-        this.isPause = false;
-    }
+    unpause() { this.isPause = false; }
 
     // se ejecuta al enviar una señal
     sendSignal(signal_data) {}

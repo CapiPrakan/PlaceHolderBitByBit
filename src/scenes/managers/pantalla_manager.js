@@ -1,4 +1,3 @@
-
 import Managers from "/src/scenes/managers";
 import PantallaPersoanjes from "/src/pantallas/game_objects/pantalla_personajes";
 
@@ -46,13 +45,33 @@ class PantallaManager extends Managers {
     }
 
     update() {
-        if (this.isPause) {
-            return;
-        }
+        super.update();
     }
 
     pause(){
         super.pause();
+
+        this.prota.pause();
+        this.npcs_array.forEach((npc) => {
+            npc.pause();
+        });
+    }
+
+    unpause(){
+        super.unpause();
+
+        this.prota.unpause();
+        this.npcs_array.forEach((npc) => {
+            npc.unpause();
+        });
+    }
+
+    startting_animation() {
+        this.pause();
+    }
+
+    finnish_animation() {
+        this.unpause();
     }
 
     _load_background(width, height) {
@@ -75,7 +94,7 @@ class PantallaManager extends Managers {
     }
 
     _load_prota() {
-        this._load_personaje(this.pantalla_data.prota)
+        this.prota = this._load_personaje(this.pantalla_data.prota)
     }
 
     _load_personaje(datos) {

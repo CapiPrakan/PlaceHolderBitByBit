@@ -135,7 +135,6 @@ class DataInfo extends Phaser.Scene {
 
     load_json(name) {
         const json_suffix = this.data_json.Suffix;
-
         this.load.json(this.json_prefix + name, this.JSON_PATH + name + json_suffix);
     }
 
@@ -144,7 +143,10 @@ class DataInfo extends Phaser.Scene {
     }
 
     get_json(name) {
-        let name2 = name[0].toUpperCase() + name.slice(1);
+        let name2 = name
+            .split("_")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join("");
         return this.cache.json.get(this.json_prefix + name)[name2];
     }
 
