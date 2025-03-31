@@ -28,6 +28,8 @@ class PantallaManager extends Managers {
         this.saves_data = this.data_info_scene.get_json(this.data_json.Saves);
 
         this._load_pantalla(this.saves_data.Pantalla);
+
+        this.scene_created();
     }
 
     _load_pantalla(pantalla) {
@@ -42,13 +44,23 @@ class PantallaManager extends Managers {
     exit() {
         super.exit();
 
-        this._change_visibility(false);
+        this.background.visible = false;
+        this.npcs_array.forEach((npc) => {
+            npc.exit();;
+        });
+        this.prota.exit();
     }
 
-    enter() {
-        super.enter();
+    enter(scene_data) {
+        if ( !super.enter(scene_data) ) { return; }
 
         this._change_visibility(true);
+
+        this.pantalla_data = this.pantallas_data[scene_data];
+
+        this._change_background();
+        this._load_npcs();
+        this._load_prota();
     }
 
     _change_visibility(visible) {
@@ -81,7 +93,7 @@ class PantallaManager extends Managers {
         });
     }
 
-    startting_animation() {
+    starting_animation() {
         this.pause();
     }
 
@@ -108,16 +120,29 @@ class PantallaManager extends Managers {
     }
 
     _load_npcs() {
+        if (this.npcs_array.length > 0) {
+            let i = 0;
+            this.npcs_array.forEach((npc) => {
+                try {
+                    npc.destroy();
+                } catch (err) {
+                    console.warn(`Error destruyendo NPC ${i}:`, err);
+                }
+                i++;
+            });
+        }
         this.npcs_array = [];
         let pantalla_data_npcs = this.pantalla_data.npcs;
         
         Object.keys(pantalla_data_npcs).forEach((key) => {
             this.npcs_array.push(this._load_personaje(pantalla_data_npcs[key]));
+            this.npcs_array[this.npcs_array.length - 1].enter();
         });
     }
 
     _load_prota() {
         this.prota = this._load_personaje(this.pantalla_data.prota)
+        this.prota.enter();
     }
 
     _load_personaje(datos) {

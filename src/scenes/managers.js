@@ -1,5 +1,8 @@
 import Phaser from "phaser";
 
+import { SCENE_MANAGER } from "/src/data/scene_data.js";
+import { SIGNAL_SCENE_CREATED } from "/src/data/signal_data.js";
+
 // esta escena de momento solo lanza la escena de dialogo
 class Managers extends Phaser.Scene {
     constructor(scene) {
@@ -9,10 +12,14 @@ class Managers extends Phaser.Scene {
     }
 
     // se ejecuta al salir de la escena
-    exit() { this.unpause(); }
+    exit() { this.pause(); }
 
     // se ejecuta al entrar en la escena
-    enter() { this.pause(); }
+    enter(scene_data) { 
+        this.pause();
+        if (!scene_data) { return false; }
+        return true;
+    }
 
     // se ejecuta al actualizar la escena
     update() { if (this.isPause) { return; } }
@@ -28,6 +35,10 @@ class Managers extends Phaser.Scene {
 
     // se ejecuta al recibir una señal
     onSignal(signal_data) {}
+
+    scene_created() {
+        this.scene.get(SCENE_MANAGER).events.emit(SIGNAL_SCENE_CREATED, this.scene.key);
+    }
 }
 
 export default Managers;

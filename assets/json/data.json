@@ -36,8 +36,22 @@
                     "Personajes"
                 ]   
             },
+            "Dialogos": {
+                "Path": "dialogos/",
+                "Dialogos": {
+                    "Path": "dialogos/",
+                    "Dialogos": [
+                        "cuadrado_dialogo",
+                        "boton_dialogo"
+                    ]
+                },
+                "Clases" : [
+                    "Dialogos"
+                ]
+            },
             "Clases": [
-                "Pantallas"
+                "Pantallas",
+                "Dialogos"
             ]
         },
         "Json": {

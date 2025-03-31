@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { DATA_INFO, SCENE_MANAGER, PANTALLA_MANAGER } from "/src/data/scene_data.js";
+import { DATA_INFO, SCENE_MANAGER, PANTALLA_MANAGER, DIALOGO_MANAGER } from "/src/data/scene_data.js";
 
 class DataInfo extends Phaser.Scene {
     constructor() {
@@ -24,17 +24,21 @@ class DataInfo extends Phaser.Scene {
     }
 
     create() {
+        // carga el data json
         this.data = this.cache.json.get(this.json_data).Assets;
         this.data_json = this.data.Json;
         this.data_imgs = this.data.Imgs;
 
+        // carga los paths de los img y json
         this.ROOT = this.data.Root;
         this.ASSETS_PATH = this.ROOT + this.data.Path;
         this.JSON_PATH = this.ASSETS_PATH + this.data_json.Path;
         this.IMG_PATH = this.ASSETS_PATH + this.data_imgs.Path;
 
+        // carga los prefijos de los assets y json
         this.json_prefix = this.data_json.Prefix;
         this.img_prefix = this.data_imgs.Prefix;
+
 
         let folders = this.data_json.Folders;
 
@@ -158,13 +162,13 @@ class DataInfo extends Phaser.Scene {
             clases_img2.forEach((clases2) => {
                 let imgs = this.data_imgs[clases][clases2][clases2];
                 imgs.forEach((name) => {
-                    this.laod_img(clases, clases2, name, this.data_imgs[clases][clases2].Path);
+                    this.laod_img(clases, clases2, name);
                 })
             });
         });
     }
 
-    laod_img(clase, clase2, name, a) {
+    laod_img(clase, clase2, name) {
         switch (clase2) {
             case "Backgrounds":
                 this.load_img2(clase, name, this.data_imgs[clase][clase2].Path);
@@ -175,6 +179,10 @@ class DataInfo extends Phaser.Scene {
                     let path = this.data_imgs[clase].Path + this.data_imgs[clase][clase2].Path + name + "/";
                     this.load_img2(clase, name + "_" + pose, path);
                 });
+                break;
+            case "Dialogos":
+                let path = this.data_imgs[clase].Path + this.data_imgs[clase][clase2].Path;
+                this.load_img2(clase, name, path);
                 break;
             default:
                 console.log("Clase no encontrada");
@@ -193,6 +201,8 @@ class DataInfo extends Phaser.Scene {
             case PANTALLA_MANAGER:
                 scene_name = "Pantallas";
                 break;
+            case DIALOGO_MANAGER:
+                scene_name = "Dialogos";
             default:
                 break;
         }
