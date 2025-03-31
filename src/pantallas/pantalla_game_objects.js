@@ -7,6 +7,7 @@ class PantallaGameObjects extends Phaser.GameObjects.Sprite {
         super(scene, x, y, nombre_img);
         this._reset_varaibles();
 
+        //  si se puede hacer click en el objeto agregamos los eventos
         if (on_click) {
             this._set_events();
             this.on_click = on_click;
@@ -143,9 +144,11 @@ class PantallaGameObjects extends Phaser.GameObjects.Sprite {
 
     _mouse_down() {}
 
-    _mouse_up() {}
+    _mouse_up() { if (this.isPause) return; this.scene.signal_click(this.on_click) }
 
     _mouse_move() {}
+
+    
 
     before_destroy() {}
 }

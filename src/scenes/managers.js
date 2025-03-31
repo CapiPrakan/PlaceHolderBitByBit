@@ -9,10 +9,10 @@ class Managers extends Phaser.Scene {
     }
 
     // se ejecuta al salir de la escena
-    exit() {}
+    exit() { this.unpause(); }
 
     // se ejecuta al entrar en la escena
-    enter() {}
+    enter() { this.pause(); }
 
     // se ejecuta al actualizar la escena
     update() { if (this.isPause) { return; } }

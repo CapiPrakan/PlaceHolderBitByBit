@@ -1,7 +1,7 @@
 import Managers from "/src/scenes/managers";
 import PantallaPersoanjes from "/src/pantallas/game_objects/pantalla_personajes";
 
-import { PANTALLA_MANAGER , DATA_INFO } from "/src/data/scene_data.js";
+import { PANTALLA_MANAGER , DATA_INFO, SCENE_MANAGER } from "/src/data/scene_data.js";
 
 // esta escena de momento solo lanza la escena de dialogo
 class PantallaManager extends Managers {
@@ -27,21 +27,36 @@ class PantallaManager extends Managers {
         this.pantallas_data = this.data_info_scene.get_json(this.data_json.Pantallas);
         this.saves_data = this.data_info_scene.get_json(this.data_json.Saves);
 
-        this.pantalla_data = this.pantallas_data[this.saves_data.Pantalla];
+        this._load_pantalla(this.saves_data.Pantalla);
+    }
+
+    _load_pantalla(pantalla) {
+        this.pantalla_data = this.pantallas_data[pantalla];
 
         const { width, height } = this.sys.game.canvas;
-
         this._load_background(width, height);
         this._load_npcs();
         this._load_prota();
     }
 
     exit() {
-        this.pause();
+        super.exit();
+
+        this._change_visibility(false);
     }
 
     enter() {
-        this.unpause();
+        super.enter();
+
+        this._change_visibility(true);
+    }
+
+    _change_visibility(visible) {
+        this.background.visible = visible;
+        this.npcs_array.forEach((npc) => {
+            npc.visible = visible;
+        });
+        this.prota.visible = visible;
     }
 
     update() {
@@ -72,6 +87,14 @@ class PantallaManager extends Managers {
 
     finnish_animation() {
         this.unpause();
+    }
+
+    signal_click(on_click) {
+        if (on_click.scene == 'pantalla') {
+            this._load_pantalla(on_click.name);
+        } else {
+            this.scene.get(SCENE_MANAGER).signal_click(on_click);
+        }
     }
 
     _load_background(width, height) {

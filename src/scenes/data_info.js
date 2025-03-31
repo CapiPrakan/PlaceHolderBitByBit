@@ -1,9 +1,9 @@
 import Phaser from "phaser";
-import { DATA_INFO, PANTALLA_MANAGER } from "/src/data/scene_data.js";
+import { DATA_INFO, SCENE_MANAGER, PANTALLA_MANAGER } from "/src/data/scene_data.js";
 
 class DataInfo extends Phaser.Scene {
     constructor() {
-        super({ key: DATA_INFO });
+        super({ key: DATA_INFO, active: true });
 
         // PATHS
         this.ROOT = '/PlaceHolderBitByBit/';
@@ -108,7 +108,7 @@ class DataInfo extends Phaser.Scene {
 
         if (progress === 1) {
             setTimeout(() => {
-                this.scene.start(PANTALLA_MANAGER);
+                this.scene.start(SCENE_MANAGER);
             }, 100);
         }
     }

@@ -1,4 +1,6 @@
 import PantallaManager from '/src/scenes/managers/pantalla_manager.js'; // Importamos la escena ScenePlay
+import SceneManager from '/src/scenes/managers/scene_manager.js'; // Importamos la escena ScenePlay
+import DialogoManager from '/src/scenes/managers/dialogo_manager.js'; // Importamos la escena ScenePlay
 import Managers from '/src/scenes/managers.js'; // Importamos la escena ScenePlay
 import DataInfo from '/src/scenes/data_info.js'; // Importamos la escena ScenePlay
 import Phaser from "phaser";
@@ -21,7 +23,9 @@ const config = {
     scene: [
         DataInfo,
         Managers,
-        PantallaManager
+        SceneManager,
+        PantallaManager,
+        DialogoManager
     ],
 
     scale: {
